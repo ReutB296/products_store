@@ -26,7 +26,7 @@ export default function AddNewProduct(){
 
     return (
         
-            <div>
+            <div className="addProduct">
                 <input ref={idRef} placeholder="id"/>
                 <input ref={titleRef} placeholder="Title"/>
                 <input ref={priceRef} placeholder="Price"/>

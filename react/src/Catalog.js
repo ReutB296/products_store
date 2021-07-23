@@ -3,8 +3,10 @@ import {CatalogContext} from './CatalogContext';
 import {useContext} from 'react';
 import AddNewProduct from './AddNewProduct';
 
+
 export default function Catalog() {
     const {products} = useContext(CatalogContext);
+  
 
     return (
         <div className="products">

@@ -8,7 +8,7 @@ export default function CatalogProvider({children}) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('/products')
+    fetch('/api/products')
       .then(response => response.json())
       .then(data => setProducts(data));
   }, []);

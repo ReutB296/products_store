@@ -12,10 +12,10 @@ app.use(logger('dev'));
 
 app.use(express.json());
 
-app.use('/products', productsRouter);
-app.use('/users', usersRouter);
-app.use('/categories', categoriesRouter);
-app.use('/posts', postsRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/posts', postsRouter);
 
 app.use(express.static('../simple-products-catalog-react/build/'));
 
