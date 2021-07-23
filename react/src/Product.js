@@ -1,13 +1,8 @@
 import './Product.css';
 import {useContext} from 'react';
 import {CartContext} from './CartContext';
-import GetProduct from './GetProduct';
 import {
-  BrowserRouter as Router,
-  Route,
   Link,
-  useRouteMatch,
-  Switch,
 } from "react-router-dom";
 
 export default function Product({
@@ -20,8 +15,6 @@ export default function Product({
   onAddToCart,
 }) {
 
-const match = useRouteMatch();
-console.log(match.url, match.path);
 
 const {addToCart} = useContext(CartContext);
 
@@ -40,9 +33,8 @@ const onEditProduct = () =>{
 
 
   return (
-    <Router>
     <div className="product">
-      <Link to={`${match.url}/${id}`}>
+      <Link to={`/products/${id}`}>
         <img src={image} className="product-image"/>
      </Link>
       <span>{category}</span>
@@ -51,14 +43,7 @@ const onEditProduct = () =>{
       <button onClick={() => addToCart(id)}>Add to Cart (${price})</button>
       <button onClick= {onDeleteProduct}>Delete Product</button>
       <button onClick= {onEditProduct}>Edit</button>
-      <Switch>
-      <Route path={`${match.path}/:id`}>
-          <GetProduct />
-      </Route>
-      </Switch>
     </div>
-     </Router> 
-    
   );
 }
 

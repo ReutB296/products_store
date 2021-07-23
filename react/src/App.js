@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useParams,
 } from "react-router-dom";
 
 import Cart from './Cart.js';
@@ -17,7 +16,6 @@ import CatalogProvider from './CatalogContext';
 import CartProvider from './CartContext';
 
 function App() {
-  // const { id } = useParams();
 
   return (
     <div className="App">
@@ -31,11 +29,11 @@ function App() {
             <Categories />
             <Catalog />
           </Route>
-          <Route path="/Products/1" >
-          <GetProduct />
-      </Route> 
           <Route path="/Cart">
             <Cart />
+          </Route>
+          <Route path="/products/:id">
+            <GetProduct />
           </Route>
        </Switch>
       </CartProvider>
