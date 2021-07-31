@@ -1,10 +1,13 @@
 import express from 'express';
 import logger from 'morgan';
+import './db/connect.mjs';
 
 import { productsRouter } from './src/products.routes.mjs';
 import { usersRouter } from './src/users.routes.mjs';
 import { categoriesRouter } from './src/categories.routes.mjs';
 import { postsRouter } from './src/posts.routes.mjs'
+
+
 
 export const app = express();
 

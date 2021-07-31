@@ -1,14 +1,18 @@
 import loadJson from 'load-json-file';
+import { getUsersCollection } from '../db/connect.mjs';
 
 let users = loadJson.sync('./data/users.json');
 
 export function getUsers() {
-    return users;
+    return getUsersCollection()
+    .find({})
+    .toArray();
 }
 
 export function getUser(userId) {
-    const [ user ] = users.filter(user => user.id == userId);
-    return user;
+    return getUsersCollection()
+    .find({userId: parseInt(userId)})
+    .toArray();
 }
 
 export function addUser(user) {

@@ -6,7 +6,6 @@ import { editUser } from './users.service.mjs';
 import { deleteUser } from './users.service.mjs';
 import { getProductsByUserId } from './products.service.mjs';
 import { getPostsByUserId } from './posts.services.mjs';
-
 export const usersRouter = express.Router();
 
 /*
@@ -36,12 +35,12 @@ POST /users/9/images - Create a new image where user id === 9
 
 */
 
-usersRouter.get('/', (req, res) => {
-    res.send(getUsers());
+usersRouter.get('/', async (req, res) => {
+    res.send(await getUsers());
 });
 
-usersRouter.get('/:id', (req, res) => {
-    res.send(getUser(req.params.id));
+usersRouter.get('/:id', async (req, res) => {
+    res.send(await getUser());
 });
 
 usersRouter.get('/:id/products', (req, res) => {

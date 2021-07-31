@@ -8,8 +8,8 @@ import { deleteProduct } from './products.service.mjs';
 export const productsRouter = express.Router();
 
 // Get products list
-productsRouter.get('/', (req, res) => {
-    res.send(getProducts());
+productsRouter.get('/', async (req, res) => {
+    res.send(await getProducts());
 });
 
 // Create new product in the products list
@@ -18,8 +18,8 @@ productsRouter.post('/', (req, res) => {
 });
 
 // Get single product from the list
-productsRouter.get('/:id', (req, res) => {
-    res.send(getProduct(req.params.id));
+productsRouter.get('/:id', async (req, res) => {
+    res.send(await getProduct());
 });
 
 // Update single product from the list
