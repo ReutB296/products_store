@@ -1,29 +1,28 @@
-import loadJson from 'load-json-file';
-import { getUsersCollection } from '../db/connect.mjs';
+import {User} from '../db/User.model.mjs';
+import mongo from 'mongodb';
+const {ObjectId} = mongo;
 
-let users = loadJson.sync('./data/users.json');
 
 export function getUsers() {
-    return getUsersCollection()
-    .find({})
-    .toArray();
+    return User.find();
 }
 
-export function getUser(userId) {
-    return getUsersCollection()
-    .find({userId: parseInt(userId)})
-    .toArray();
+export async function getUser(id) {
+    return User.findOne({id: ObjectId(id)})
 }
 
-export function addUser(user) {
-    users.push(user);
+export async function addUser(user) {
+    const newUser = new User(user);
+    return newUser.save();
 }
 
-export function deleteUser(userId) {
-    users = users.filter(user => user.id != userId);
+export async function deleteUser(userId) {
+    return User.findOneAndDelete({id: ObjectId(userId)})
 }
 
-export function editUser(userId, newUser) {
-    const [ user ] = users.filter(user => user.id == userId);
-    user.email = newUser.email;
+export async function editUser(id, newUser) {
+    return User.findOneAndUpdate(
+        {id: ObjectId(id)},
+        newUser
+    );
 }

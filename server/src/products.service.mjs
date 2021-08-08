@@ -1,4 +1,6 @@
 import loadJson from 'load-json-file';
+import { ObjectId } from 'mongodb';
+import { getUser } from './users.service.mjs';
 import { getProductsCollection } from '../db/connect.mjs';
 
 export let products = loadJson.sync('./data/products.json');
@@ -9,26 +11,33 @@ export function getProducts() {
     .toArray();
 }
 
-export function getProduct(id) {
-    return getProductsCollection()
-    .find({id: parseInt(id)})
-    .toArray();
+export async function getProduct(id) {
+    const product = await getProductsCollection()
+    .findOne({_id: ObjectId(id)});
+   
+    const owner = await getUser(product.userId);
+
+    product.owner = owner;
+
+    return product;
 }
 
 export function addProduct(product) {
-    products.unshift(product);
-    console.log(product);
+    return getProductsCollection()
+    .insertOne(product)
 }
 
 export function deleteProduct(id) {
-    products = products.filter(product => product.id != id);
+    return getProductsCollection()
+    .deleteOne({id: parseInt(id)});
 }
 
 export function editProduct(id, newProduct) {
-    const [ product ] = products.filter(product => product.id == id);
-    product.title = newProduct.title;
-    product.category = newProduct.category;
-    product.price = newProduct.price;
+    return getProductsCollection()
+    .updateOne(
+        {id: parseInt(id)},
+        {$set: newProduct}
+    )
 }
 
 export function getProductsByUserId(userId) {

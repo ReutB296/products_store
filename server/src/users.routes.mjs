@@ -4,8 +4,8 @@ import { getUser } from './users.service.mjs';
 import { addUser } from './users.service.mjs';
 import { editUser } from './users.service.mjs';
 import { deleteUser } from './users.service.mjs';
-import { getProductsByUserId } from './products.service.mjs';
-import { getPostsByUserId } from './posts.services.mjs';
+// import { getProductsByUserId } from './products.service.mjs';
+// import { getPostsByUserId } from './posts.services.mjs';
 export const usersRouter = express.Router();
 
 /*
@@ -40,7 +40,7 @@ usersRouter.get('/', async (req, res) => {
 });
 
 usersRouter.get('/:id', async (req, res) => {
-    res.send(await getUser());
+    res.send(await getUser(req.params.id));
 });
 
 usersRouter.get('/:id/products', (req, res) => {
